@@ -27,12 +27,13 @@ $http.interceptors.request.use(
 $http.interceptors.response.use(
   response => {
     NProgress.done();
-    if (response.status == '200' || response.data.statusCode == '200') {
-      if (response.request.responseType == 'blob') {
-        return response.data;
-      } else {
-        return response.data.result
-      }
+    console.log('interceptors', response)
+    if (response.status == '200' || response.status == '201') {
+      // if (response.request.responseType == 'blob') {
+      return response.data;
+      // } else {
+      //   return response.data.result
+      // }
     } else {
       store.dispatch("pushMessage", response.data.message);
       return Promise.reject(response.data);

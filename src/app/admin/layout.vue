@@ -3,7 +3,7 @@
     <el-aside class="siderbar" width="240px">
       <div class="slogen">
         <img src="~@/assets/logo.png" width="80px" alt />
-        <p>蓝创考勤管理系统</p>
+        <!-- <p>蓝创考勤管理系统</p> -->
       </div>
       <side-menu></side-menu>
     </el-aside>
@@ -45,7 +45,7 @@ export default {
     background: #1e1a3b;
     color: #fff;
     .slogen {
-      padding: 20px 0 0;
+      padding: 0;
       text-align: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       p {

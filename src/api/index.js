@@ -1,10 +1,6 @@
-import { account } from './modules/account';
-import { attence } from './modules/attence';
-import { organization } from './modules/organization';
-import { finance } from './modules/finance';
+import { invoice } from './modules/invoice';
+import { contract } from './modules/contract';
 export default {
-  account,
-  attence,
-  organization,
-  finance
+  invoice,
+  contract,
 };

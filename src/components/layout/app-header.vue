@@ -1,17 +1,17 @@
 <template>
   <el-row type="flex" justify="space-between" align="middle" class="box">
-    <el-col>{{menuText}}</el-col>
+    <el-col>{{ menuText }}</el-col>
     <el-col>
       <el-row type="flex" justify="end" align="middle" :gutter="5">
-        <el-col>
+        <!-- <el-col>
           <i class="avatar el-icon-user-solid"></i>
-        </el-col>
-        <el-col>
-          <span class="name">{{user.name}}</span>
-        </el-col>
-        <el-col class="link" @click.native="handleLogout">
+        </el-col> -->
+        <!-- <el-col>
+          <span class="name">{{ user.name }}</span>
+        </el-col> -->
+        <!-- <el-col class="link" @click.native="handleLogout">
           <i class="el-icon-switch-button"></i>
-        </el-col>
+        </el-col> -->
       </el-row>
     </el-col>
   </el-row>

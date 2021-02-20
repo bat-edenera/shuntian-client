@@ -38,4 +38,4 @@ Element.DatePicker.mixins[0].props.pickerOptions = {
     }
   }
 }
-Vue.use(Element, { size: 'small' })
+Vue.use(Element, { size: 'mini' })

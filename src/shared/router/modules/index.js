@@ -1,14 +1,14 @@
 export default [
-  { path: "", redirect: "dashboard" },
+  { path: "", redirect: "contract" },
   {
     path: "dashboard",
     name: "dashboard",
     component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/dashboard'),
   },
   {
-    path: "attence",
-    name: "attence",
-    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/attence'),
+    path: "contract",
+    name: "contract",
+    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/contract'),
   },
   {
     path: "finance",

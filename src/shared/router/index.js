@@ -23,7 +23,7 @@ const router = new Router({
       path: "/",
       component: Layout,
       exact: true,
-      meta: { requireAuth: true },
+      meta: { requireAuth: false },
       children: getRouterModules(),
     },
     {
@@ -35,7 +35,7 @@ const router = new Router({
     },
     {
       path: "*",
-      redirect: "/dashboard",
+      redirect: "/contract",
     },
   ],
 });

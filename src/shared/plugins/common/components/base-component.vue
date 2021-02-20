@@ -1,23 +1,20 @@
 <template>
   <div>
     <el-form label-width="80px" class="query-form" ref="form">
-      <el-row :gutter="15" type="flex">
-        <slot name="query"></slot>
+      <el-row :gutter="15" type="flex" justify="space-between" style="margin-bottom: 15px">
+        <slot name="query">
+          <el-col></el-col>
+        </slot>
+        <el-col>
+          <el-button type="primary" icon="el-icon-search" @click="getPageData()">查询</el-button>
+          <slot name="action" :row="selectData" :action="action"></slot>
+        </el-col>
       </el-row>
     </el-form>
-    <el-row type="flex" justify="space-between" style="margin-bottom: 15px" class="query-action">
-      <el-col>
-        <el-button type="primary" icon="el-icon-search" @click="getPageData()">查询</el-button>
-        <el-button @click="$parent._reset">重置</el-button>
-      </el-col>
-      <el-col>
-        <slot name="action" :row="selectData" :action="action"></slot>
-      </el-col>
-    </el-row>
     <el-table ref="table" v-loading="load" :data="pageData" row-key="id" stripe @current-change="selectChange" @row-dblclick="handleDbClick">
       <slot name="table" :action="action"></slot>
     </el-table>
-    <Pagination ref="pagination" :total="total" @change="getPageData"></Pagination>
+    <!-- <Pagination ref="pagination" :total="total" @change="getPageData"></Pagination> -->
     <slot name="default"></slot>
   </div>
 </template>
@@ -30,7 +27,6 @@ export default {
       action: "",
       pageData: [],
       selectData: undefined,
-      pagination: undefined,
       total: 0,
     };
   },
@@ -38,7 +34,7 @@ export default {
     this.action = this.$route.meta.action;
   },
   mounted() {
-    this.pagination = this.$refs.pagination;
+    // this.pagination = this.$refs.pagination;
     this.getPageData();
   },
   methods: {
@@ -51,27 +47,22 @@ export default {
     handleDbClick(record) {
       this.action === "approve" ? this.$parent.approve && this.$parent.approve(record) : this.$parent.view && this.$parent.view(record);
     },
-    async getPageData(pagination) {
+    async getPageData() {
       this.loading();
-      let params = {
-        ...this.$parent.queryInfo,
-      };
+      // let params = {
+      //   ...this.$parent.queryInfo,
+      // };
 
-      if (pagination) {
-        params.pageNum = pagination.current;
-        params.pageSize = pagination.pageSize;
-      } else {
-        this.pagination.current = 1;
-        params.pageNum = 1;
-        params.pageSize = this.pagination.pageSize;
-      }
+      // if (pagination) {
+      //   params.pageNum = pagination.current;
+      //   params.pageSize = pagination.pageSize;
+      // } else {
+      //   this.pagination.current = 1;
+      //   params.pageNum = 1;
+      //   params.pageSize = this.pagination.pageSize;
+      // }
       try {
-        let {
-          data,
-          pagination: { total },
-        } = await this.$parent._getPageData(params);
-        this.pageData = data;
-        this.total = total;
+        this.pageData = await this.$parent._getPageData();
       } catch (e) {
         console.log(e);
       }

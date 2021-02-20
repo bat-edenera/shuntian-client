@@ -10,8 +10,7 @@ class MenuItem {
 }
 const menuData = [
   new MenuItem("dashboard", "首页", "/dashboard", "el-icon-s-home"),
-  new MenuItem("attence", "考勤管理", "/attence", "el-icon-s-order"),
-  new MenuItem("finance", "消费管理", "/finance", "el-icon-s-finance"),
+  new MenuItem("contract", "合同对账", "/contract", "el-icon-s-order"),
   // new MenuItem("system", "系统管理", "/setting", "el-icon-s-tools", "", [
   //   new MenuItem("params", "系统参数", "/params", "el-icon-s-order", ""),
   //   new MenuItem("role", "权限管理", "/params", "el-icon-s-order", "", [

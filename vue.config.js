@@ -1,7 +1,7 @@
 // vue.config.js
 module.exports = {
   productionSourceMap: process.env.NODE_ENV !== 'production',
-  outputDir: 'web',
+  outputDir: 'dist',
   devServer: {
     proxy: {
       "/": {
