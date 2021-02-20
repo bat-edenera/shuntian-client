@@ -1,0 +1,46 @@
+@import 'reset-css';
+.el-row--flex {
+  & > .el-col-24 {
+    width: inherit !important;
+  }
+}
+.el-table {
+  // &.el-table--enable-row-hover .el-table__body tr:hover {
+  //   td {
+  //     background-color: #cfd8e4;
+  //   }
+  // }
+  // td,
+  // th {
+  //   font-size: 14px;
+  // }
+  // tr.current-row {
+  //   td {
+  //     background-color: rgb(109, 170, 231) !important;
+  //     color: #fff;
+  //     //引入组件引起的表格嵌套
+  //     .el-table /deep/ {
+  //       td {
+  //         background-color: inherit !important;
+  //         color: inherit !important;
+  //       }
+  //       tr:hover td {
+  //         background-color: #cfd8e4 !important;
+  //       }
+  //     }
+
+  //     .el-link {
+  //       color: #fff;
+  //     }
+  //   }
+  // }
+  thead tr th {
+    background-color:#efefef;
+    font-weight: bold;
+  }
+  &.clickable {
+    tbody tr {
+      cursor: pointer;
+    }
+  }
+}
