@@ -34,7 +34,11 @@ export default {
   methods: {
     setMenuTitle(val) {
       let item = this.menuData.filter((el) => el.url === val);
-      this.$store.commit("setMenuText", item[0].title);
+      if (item.length > 0) {
+        this.$store.commit("setMenuText", item[0].title);
+      } else {
+        this.$store.commit("setMenuText", this.$route.meta.title);
+      }
     },
   },
 };

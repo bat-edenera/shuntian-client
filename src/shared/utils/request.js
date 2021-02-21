@@ -3,7 +3,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import store from "@/shared/store";
 const baseURL = process.env.VUE_APP_BASEURL;
-
+NProgress.configure({ showSpinner: false })
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const $http = axios.create({
   baseURL: baseURL,
@@ -27,7 +27,6 @@ $http.interceptors.request.use(
 $http.interceptors.response.use(
   response => {
     NProgress.done();
-    console.log('interceptors', response)
     if (response.status == '200' || response.status == '201') {
       // if (response.request.responseType == 'blob') {
       return response.data;

@@ -11,9 +11,11 @@ export default [
     component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/contract'),
   },
   {
-    path: "finance",
-    name: "finance",
-    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/finance'),
+    path: "checkContract",
+    name: "checkContract",
+    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/check'),
+    props: (route) => ({ contractId: route.query.id }),
+    meta: { title: '对账详情' }
   },
   {
     path: "user",

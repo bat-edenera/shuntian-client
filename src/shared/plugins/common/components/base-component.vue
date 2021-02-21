@@ -1,17 +1,34 @@
 <template>
   <div>
     <el-form label-width="80px" class="query-form" ref="form">
-      <el-row :gutter="15" type="flex" justify="space-between" style="margin-bottom: 15px">
+      <el-row
+        :gutter="15"
+        type="flex"
+        justify="space-between"
+        style="margin-bottom: 15px"
+      >
         <slot name="query">
           <el-col></el-col>
         </slot>
         <el-col>
-          <el-button type="primary" icon="el-icon-search" @click="getPageData()">查询</el-button>
+          <el-button
+            type="primary"
+            icon="el-icon-refresh"
+            @click="getPageData()"
+          ></el-button>
           <slot name="action" :row="selectData" :action="action"></slot>
         </el-col>
       </el-row>
     </el-form>
-    <el-table ref="table" v-loading="load" :data="pageData" row-key="id" stripe @current-change="selectChange" @row-dblclick="handleDbClick">
+    <el-table
+      ref="table"
+      v-loading="load"
+      :data="pageData"
+      row-key="id"
+      stripe
+      @current-change="selectChange"
+      @row-dblclick="handleDbClick"
+    >
       <slot name="table" :action="action"></slot>
     </el-table>
     <!-- <Pagination ref="pagination" :total="total" @change="getPageData"></Pagination> -->
@@ -45,7 +62,9 @@ export default {
       this.selectData = value;
     },
     handleDbClick(record) {
-      this.action === "approve" ? this.$parent.approve && this.$parent.approve(record) : this.$parent.view && this.$parent.view(record);
+      this.action === "approve"
+        ? this.$parent.approve && this.$parent.approve(record)
+        : this.$parent.view && this.$parent.view(record);
     },
     async getPageData() {
       this.loading();

@@ -2,12 +2,14 @@ import Request from "@/shared/utils/request";
 
 class Contract {
   constructor() { }
-  /**
-   * 考勤列表
-   * @param {{"startTime, endTime,pageSize,pageNum,orgIndexCode}} payload 
-   */
   pagelist(payload) {
     return Request.get('/contract')
+  }
+  check(id) {
+    return Request.get('/invoice/check/' + id)
+  }
+  upload(payload) {
+    return Request.post('/contract/upload', payload, { contentType: 'application/x-www-form-urlencoded' })
   }
 }
 
