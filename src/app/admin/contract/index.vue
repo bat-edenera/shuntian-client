@@ -33,7 +33,7 @@
             :show-file-list="false"
             accept="image/*,application/pdf"
           >
-            <el-button type="text" :loading="loading">上传发票</el-button>
+            <el-button type="text">上传发票</el-button>
           </el-upload>
           <el-button
             type="text"
@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       queryInfo: {},
-      loading: false,
     };
   },
   async created() {},
@@ -68,12 +67,10 @@ export default {
       return Api.contract.pagelist(params);
     },
     async upload(payload, contract) {
-      this.loading = true;
       let formData = new FormData();
       formData.append("file", payload.file);
       formData.append("contract", contract.id);
       let res = await Api.invoice.upload(formData);
-      this.loading = false;
       if (res.message) {
         this.$message.warning(res.message);
       } else {
