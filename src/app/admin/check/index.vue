@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-table v-loading="loading" :data="pageData" row-key="id" stripe>
+    <el-table
+      v-loading="loading"
+      :data="pageData"
+      row-key="id"
+      stripe
+      :span-method="arraySpanMethod"
+    >
       <el-table-column type="index"></el-table-column>
       <el-table-column
         prop="invoiceNo"
@@ -58,6 +64,15 @@ export default {
     reload() {
       this.$refs.Base.reload();
     },
+    arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex !== 1 && columnIndex !== 0) {
+        // if (rowIndex % 2 === 0) {
+        //   return [2, 1];
+        // } else {
+        //   return [0, 0];
+        // }
+      }
+    },
     checkContract({ invoice: invoices, contract }) {
       let contractItems = contract.items.map((el) => ({
         c_amount: el.amount,
@@ -93,6 +108,12 @@ export default {
           this.pageData.push(row);
         });
       });
+      //sort
+      this.pageData.sort((a, b) => {
+        let flag = a.type === b.type && a.price === b.price;
+        return flag ? -1 : 1;
+      });
+
       //2 no matched contract
       contractItems.forEach((el) => {
         if (!el.c_matched) {

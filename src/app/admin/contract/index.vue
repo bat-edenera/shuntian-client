@@ -74,7 +74,7 @@ export default {
       if (res.message) {
         this.$message.warning(res.message);
       } else {
-        this.$message.warning("上传成功");
+        this.$message.success("上传成功");
       }
     },
     async uploadContract(payload) {
