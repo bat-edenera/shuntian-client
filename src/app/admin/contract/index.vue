@@ -1,6 +1,9 @@
 <template>
   <base-component ref="Base">
     <template #action>
+      <el-button icon="el-icon-download" @click="dloadTemplate"
+        >下载模板</el-button
+      >
       <el-upload
         style="display: inline-block; margin-left: 10px"
         action="string"
@@ -20,7 +23,7 @@
           row.created | datetime("YYYY-MM-DD HH:mm")
         }}</template>
       </el-table-column>
-      <el-table-column label="操作" width="200" header-align="center">
+      <el-table-column label="操作" width="200" align="center">
         <template #default="{ row }">
           <el-upload
             style="display: inline-block; margin-right: 10px"
@@ -47,6 +50,7 @@
 
 <script>
 import Api from "@/api";
+import FileSaver from "file-saver";
 export default {
   name: "Attence",
   data() {
@@ -85,6 +89,10 @@ export default {
       } else {
         this.reload();
       }
+    },
+    async dloadTemplate() {
+      let blob = await Api.contract.getTemplate();
+      FileSaver.saveAs(blob, "contract(文件名将作为合同名称保存).xlsx");
     },
   },
 };

@@ -42,7 +42,7 @@ export default {
 .conteiner {
   height: 100vh;
   .siderbar {
-    background: #1e1a3b;
+    background: #0d0a29;
     color: #fff;
     .slogen {
       padding: 0;

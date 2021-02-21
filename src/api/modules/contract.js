@@ -11,6 +11,9 @@ class Contract {
   upload(payload) {
     return Request.post('/contract/upload', payload, { contentType: 'application/x-www-form-urlencoded' })
   }
+  getTemplate() {
+    return Request.get('/contract/template', { responseType: 'blob' })
+  }
 }
 
 export const contract = new Contract();

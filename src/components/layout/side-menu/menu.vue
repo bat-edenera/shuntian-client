@@ -5,7 +5,7 @@
     :default-active="$route.path"
     background-color="#1e1a3b"
     text-color="#fff"
-    active-text-color="#0eac9d"
+    active-text-color="#666ce6"
     router
   >
     <menu-item :routes="menuData"></menu-item>
@@ -58,7 +58,7 @@ export default {
       left: 0;
       width: 5px;
       height: 100%;
-      background: #0eac9d;
+      background: #666ce6;
       content: "";
       display: none;
     }
@@ -66,7 +66,7 @@ export default {
       &:before {
         display: block;
       }
-      background-color: #1a3850 !important;
+      background-color: #2a2f5f !important;
     }
   }
 }
