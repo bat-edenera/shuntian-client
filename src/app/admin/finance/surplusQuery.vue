@@ -2,18 +2,6 @@
   <base-component ref="Base">
     <template #query>
       <el-col :span="6">
-        <el-form-item label="日期">
-          <el-date-picker
-            @change="reload"
-            v-model="dateRange"
-            type="datetimerange"
-            start-placeholder="开始"
-            end-placeholder="结束"
-            value-format="yyyy-MM-dd HH:mm"
-          ></el-date-picker>
-        </el-form-item>
-      </el-col>
-      <el-col :span="6">
         <el-form-item label="消费者">
           <el-select
             v-model="queryInfo.personId"
@@ -25,7 +13,7 @@
             :loading="loading"
             popper-class="autocomplete"
           >
-            <el-option v-for="(item, index) in options" :key="index" :label="item.personName" :value="item.id">
+            <el-option v-for="(item, index) in userList" :key="index" :label="item.personName" :value="item.id">
               <div class="title">
                 {{ item.personName }}
               </div>
@@ -35,59 +23,45 @@
         </el-form-item>
       </el-col>
       <el-col :span="6">
-        <el-form-item label="消费类型">
-          <el-select v-model="queryInfo.type" clearable @change="reload">
-            <el-option label="消费" :value="-1"></el-option>
-            <el-option label="充值" :value="1"></el-option>
-            <el-option label="全部" :value="0"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-col>
-      <el-col :span="6">
         <el-form-item label="部门">
           <el-cascader
             @change="reload"
-            multiple
             clearable
             v-model="queryInfo.orgIndexCode"
-            :props="{ emitPath: false, checkStrictly: true, value: 'id', label: 'name' }"
+            :props="{ emitPath: false, value: 'id', label: 'name', multiple: true }"
             :options="orgTree"
           ></el-cascader>
         </el-form-item>
       </el-col>
     </template>
-    <template #action>
+    <!-- <template #action>
       <el-button type="primary" icon="el-icon-download" @click="exportData">导出</el-button>
-    </template>
+    </template> -->
     <template #table>
-      <el-table-column prop="orgName" label="部门" width="300">
+      <el-table-column prop="orgName" label="部门">
         <template #default="{ row }">{{ row.orgName.replace("默认组织/", "") }}</template>
       </el-table-column>
-      <el-table-column prop="personName" label="消费者"></el-table-column>
-      <el-table-column prop="dinningType" label="餐别" width="120"></el-table-column>
+      <el-table-column prop="personName" label="消费者" width="300"></el-table-column>
+      <!-- <el-table-column prop="dinningType" label="餐别" width="120"></el-table-column>
       <el-table-column prop="deduction" label="消费金额" width="100"></el-table-column>
-      <el-table-column prop="typeName" label="类型" width="100"></el-table-column>
+      <el-table-column prop="typeName" label="类型" width="100"></el-table-column> -->
       <el-table-column prop="balance" label="余额" width="100"></el-table-column>
-      <el-table-column prop="debitDate" label="日期" width="120"></el-table-column>
+      <!-- <el-table-column prop="debitDate" label="日期" width="120"></el-table-column> -->
     </template>
   </base-component>
 </template>
 
 <script>
 import Api from "@/api";
-import FileSaver from "file-saver";
-import axios from "axios";
-import moment from "moment";
 export default {
-  name: "Attence",
+  name: "SurplusQuery",
   data() {
     return {
-      queryInfo: { type: 0 },
-      dateRange: [moment().subtract(1, "months").format("YYYY-MM-DD"), moment().format("YYYY-MM-DD")],
+      queryInfo: {},
       orgTree: [],
       orgList: [],
       loading: false,
-      options: [],
+      userList: [],
     };
   },
   async created() {
@@ -100,8 +74,6 @@ export default {
       this.$refs.Base.reload();
     },
     _getPageData(params) {
-      params.startTime = this.dateRange && this.dateRange[0];
-      params.endTime = this.dateRange && this.dateRange[1];
       params.queryInfo.orgIndexCode = params.queryInfo.orgIndexCode.join(",");
       return Api.finance.pagelist(params);
     },
@@ -110,24 +82,14 @@ export default {
       this.dateRange = [];
       this.reload();
     },
-    async exportData() {
-      let blob = await Api.finance.export({
-        ...this.queryInfo,
-        pageNum: undefined,
-        startTime: this.dateRange && this.dateRange[0],
-        endTime: this.dateRange && this.dateRange[1],
-      });
-      FileSaver.saveAs(blob, "account.xlsx");
-    },
     async remoteMethod(query) {
       if (query) {
         this.loading = true;
         let res = await Api.account.getUserListByKey(query);
-        this.options = this.handleUserList(res.data);
+        this.userList = this.handleUserList(res.data);
         this.loading = false;
       }
     },
-    handleSelect() {},
     handleUserList(users) {
       return users.map((user) => {
         let orgName = user.orgName;

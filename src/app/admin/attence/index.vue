@@ -17,7 +17,7 @@
             @change="reload"
             clearable
             v-model="queryInfo.orgIndexCode"
-            :props="{ emitPath: false, checkStrictly: true, value: 'id', label: 'name' }"
+            :props="{ emitPath: false, value: 'id', label: 'name', multiple: true }"
             :options="orgTree"
           ></el-cascader>
         </el-form-item>
@@ -66,6 +66,7 @@ export default {
     _getPageData(params) {
       params.startTime = this.dateRange && this.dateRange[0];
       params.endTime = this.dateRange && this.dateRange[1];
+      params.queryInfo.orgIndexCode = params.queryInfo.orgIndexCode.join(",");
       return Api.attence.pagelist(params);
     },
     _reset() {

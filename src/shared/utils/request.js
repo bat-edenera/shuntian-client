@@ -7,7 +7,7 @@ const baseURL = process.env.VUE_APP_BASEURL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const $http = axios.create({
   baseURL: baseURL,
-  timeout: 1000000000000
+  timeout: 5000
 });
 
 $http.interceptors.request.use(

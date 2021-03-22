@@ -35,22 +35,13 @@
         </el-form-item>
       </el-col>
       <el-col :span="6">
-        <el-form-item label="消费类型">
-          <el-select v-model="queryInfo.type" clearable @change="reload">
-            <el-option label="消费" :value="-1"></el-option>
-            <el-option label="充值" :value="1"></el-option>
-            <el-option label="全部" :value="0"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-col>
-      <el-col :span="6">
         <el-form-item label="部门">
           <el-cascader
             @change="reload"
             multiple
             clearable
             v-model="queryInfo.orgIndexCode"
-            :props="{ emitPath: false, checkStrictly: true, value: 'id', label: 'name' }"
+            :props="{ emitPath: false, value: 'id', label: 'name', multiple: true }"
             :options="orgTree"
           ></el-cascader>
         </el-form-item>
@@ -76,10 +67,9 @@
 <script>
 import Api from "@/api";
 import FileSaver from "file-saver";
-import axios from "axios";
 import moment from "moment";
 export default {
-  name: "Attence",
+  name: "CommonQuery",
   data() {
     return {
       queryInfo: { type: 0 },

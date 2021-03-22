@@ -9,6 +9,9 @@ class Finance {
   pagelist(payload) {
     return Request.post('/account/getList?_DEBUG_MODE_', payload)
   }
+  surplusPagelist(payload) {
+    return Request.post('/account/GetAccountBalance?_DEBUG_MODE_', payload)
+  }
   export(payload) {
     return Request.post('/account/Export?_DEBUG_MODE_', payload, { responseType: 'blob' })
   }

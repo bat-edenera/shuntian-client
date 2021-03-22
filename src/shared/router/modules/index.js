@@ -11,9 +11,19 @@ export default [
     component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/attence'),
   },
   {
-    path: "finance",
-    name: "finance",
+    path: "finance/manage",
+    name: "financeManage",
     component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/finance'),
+  },
+  {
+    path: "finance/surplus",
+    name: "surplus",
+    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/finance/surplusQuery'),
+  },
+  {
+    path: "finance/query",
+    name: "financeQuery",
+    component: () => import(/* webpackChunkName: "dashboard" */'@/app/admin/finance/commonQuery'),
   },
   {
     path: "user",
